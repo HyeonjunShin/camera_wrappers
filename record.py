@@ -33,7 +33,7 @@ def main():
             break
 
         if key == 32:
-            if not is_recording:
+            if not is_recording:    
                 # 이 부분에 OUTPUT_DIR이 존재하는지 확인 후 없으면 폴더를 생성하고,
                 is_recording = not is_recording
                 session_id = time.strftime("%Y%m%d_%H%M%S")
