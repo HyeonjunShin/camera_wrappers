@@ -17,7 +17,11 @@
 		"-it",
         "--device=/dev/bus/usb:/dev/bus/usb",
         "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+        "-v", "${localEnv:HOME}/.Xauthority:/home/vscode/.Xauthority",
         "-e", "DISPLAY=${localEnv:DISPLAY}",
+        "--gpus", "all",
+        "--ipc", "host",
+        "--net", "host"
     ],
     
     // "features": {},
