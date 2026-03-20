@@ -3,7 +3,7 @@ set -e
 
 echo "--- 0. Installing missing dependencies ---"
 sudo apt-get update
-sudo apt-get install -y libudev-dev libusb-1.0-0-dev python3 python3-pip
+sudo apt-get install -y libudev-dev libusb-1.0-0-dev
 
 SDK_ROOT="/tmp/Azure-Kinect-Sensor-SDK"
 

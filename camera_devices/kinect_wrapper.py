@@ -1,16 +1,16 @@
 from pyk4a import PyK4A, Config, ColorResolution, DepthMode, FPS, ImageFormat, CalibrationType, ColorControlCommand, ColorControlMode
+import cv2
 
 class KinectCamera:
     def __init__(self):
-        self.k4a = PyK4A(
-            Config(
+        self.config = Config(
                 color_resolution=ColorResolution.RES_1080P,
                 color_format=ImageFormat.COLOR_BGRA32,
-                depth_mode=DepthMode.NFOV_UNBINNED,
+                depth_mode=DepthMode.WFOV_UNBINNED,
                 synchronized_images_only=True,
-                camera_fps=FPS.FPS_30,
+                camera_fps=FPS.FPS_15,
             )
-        )
+        self.k4a = PyK4A(self.config)
 
         self.width = 1920
         self.height = 1080
@@ -99,7 +99,7 @@ class KinectCamera:
         self.k4a.stop()
         print("Stop the Kinect camera.")
     
-    def getFrame(self):
+    def get_frame(self):
         capture = self.k4a.get_capture()
 
         color = capture.color
