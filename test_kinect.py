@@ -13,8 +13,9 @@ def mouse_callback(event, x, y, flags, param):
 def main():
     camera = KinectCamera()
     camera.start()
-    # print(camera.K)
-
+    K = camera.K()
+    D = camera.D()
+    
     cv2.namedWindow('img')
     cv2.setMouseCallback('img', mouse_callback)
 
