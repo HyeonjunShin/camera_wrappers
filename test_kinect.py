@@ -13,8 +13,8 @@ def mouse_callback(event, x, y, flags, param):
 def main():
     camera = KinectCamera()
     camera.start()
-    K = camera.K()
-    D = camera.D()
+    K = camera.K
+    D = camera.D
     
     cv2.namedWindow('img')
     cv2.setMouseCallback('img', mouse_callback)
@@ -36,6 +36,8 @@ def main():
         text = f"X: {mouse_x}, Y: {mouse_y}, depth: {depth[mouse_y][mouse_x]}"
         cv2.putText(color, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
         cv2.circle(color, (mouse_x, mouse_y), 4, (0,255,0), -1, cv2.LINE_AA)
+
+        color = cv2.cvtColor(color, cv2.COLOR_BGR2RGB)
         cv2.imshow("img", color)
         cv2.imshow("depth", depth_color)
         
