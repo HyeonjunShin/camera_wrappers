@@ -11,7 +11,6 @@ from pyk4a import (
     PyK4A,
 )
 
-
 class KinectCamera:
     def __init__(self):
         self.config = Config(
