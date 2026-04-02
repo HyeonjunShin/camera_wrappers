@@ -3,7 +3,22 @@ set -e
 
 echo "--- 0. Installing missing dependencies ---"
 sudo apt-get update
-sudo apt-get install -y libudev-dev libusb-1.0-0-dev
+sudo apt-get install -y libudev-dev \
+    libusb-1.0-0-dev \
+    libssl-dev \
+    build-essential \
+    ninja-build cmake \
+    libvulkan-dev \
+    libx11-dev \
+    libxrandr-dev \
+    libxinerama-dev \
+    libxcursor-dev \
+    libxi-dev \
+    libgl1-mesa-dev \
+    libjpeg-dev \
+    libsoundio-dev \
+    uuid-dev \
+    python3-pip
 
 SDK_ROOT="/tmp/Azure-Kinect-Sensor-SDK"
 
@@ -58,7 +73,8 @@ ln -sf /usr/lib/x86_64-linux-gnu/libdepthengine.so.2.0 /usr/lib/x86_64-linux-gnu
 ln -sf /usr/lib/x86_64-linux-gnu/libdepthengine.so.2 /usr/lib/x86_64-linux-gnu/libdepthengine.so
 ldconfig
 
-pip3 install pyk4a --break-system-packages
+# pip3 install pyk4a --break-system-packages
+pip3 install pyk4a
 
 echo "--- 5. Cleanup ---"
 rm -rf /tmp/Azure-Kinect-Sensor-SDK /tmp/k4a_extract
