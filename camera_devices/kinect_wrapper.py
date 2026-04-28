@@ -152,7 +152,7 @@ class KinectCamera:
             return None
         timestamp_image = capture.color_timestamp_usec
 
-        color = cv2.cvtColor(color, cv2.COLOR_BGRA2RGB)
+        color = cv2.cvtColor(color, cv2.COLOR_BGRA2BGR)
         # image = cv2.remap(image, self.mapx, self.mapy, cv2.INTER_LINEAR)
 
         # depth = cv2.remap(depth, self.mapx, self.mapy, cv2.INTER_LINEAR)
