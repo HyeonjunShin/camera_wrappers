@@ -32,7 +32,7 @@ HEADER_SIZE = 24
 
 cv2.namedWindow("color", cv2.WINDOW_GUI_NORMAL)
 try:
-    shm = shared_memory.SharedMemory(name="camera_double_buf")
+    shm = shared_memory.SharedMemory(name="camera_shm")
     last_processed_count = -1
 
 

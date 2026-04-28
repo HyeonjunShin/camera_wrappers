@@ -25,8 +25,8 @@ def main():
     TOTAL_SIZE = HEADER_SIZE + (SLOT_SIZE * 2) # 두 개의 슬롯 확보
 
     try:
-        shm = shared_memory.SharedMemory(name="camera_double_buf", create=True, size=TOTAL_SIZE)
-        print(f"🚀 Double Buffering Producer 시작")
+        shm = shared_memory.SharedMemory(name="camera_shm", create=True, size=TOTAL_SIZE)
+        print(f"The camera is operating.")
 
         frame_count = 0
         while True:
