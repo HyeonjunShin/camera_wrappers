@@ -35,6 +35,12 @@ flange2camera = [
 ]
 
 
+R = [
+    -2.8327694488239893e-16, 1.0, 4.440892098500626e-16, # Row 0 rotation
+    1.0, 2.83276944882399e-16, -9.957992501029591e-17,  # Row 1 rotation
+    -9.957992501029598e-17, 4.440892098500626e-16, -1.0 # Row 2 rotation
+]
+
 
 class CommModule:
     def __init__(self):
@@ -97,9 +103,15 @@ class CommModule:
                     tf_camera = self.tf_flange @ flange2camera
                     p_base = tf_camera @ p_camera
                     
-                    tf_target = np.array([1.0, 0.0, 0.0, p_base[0], 
-                                          0.0, 1.0, 0.0, p_base[1],
-                                          0.0, 0.0, 1.0, p_base[2]]).astype(np.str_).tolist()
+                    # tf_target = np.array([1.0, 0.0, 0.0, p_base[0], 
+                    #                       0.0, 1.0, 0.0, p_base[1],
+                    #                       0.0, 0.0, 1.0, p_base[2],
+                    #                       0.0, 0.0, 0.0, 1.0]).astype(np.str_).tolist()
+                    tf_target = np.array([-2.8327694488239893e-16, 1.0, 4.440892098500626e-16,p_base[0],
+                                        1.0, 2.83276944882399e-16, -9.957992501029591e-17,  p_base[1],
+                                        -9.957992501029598e-17, 4.440892098500626e-16, -1.0, p_base[2],
+                                        0.0, 0.0, 0.0, 1.0  
+                                    ]).astype(np.str_).tolist()
                     tf_target = ["1", "0.9"] + tf_target
                     # print(tf_target)
                     self.pub.put(" ".join(tf_target))
