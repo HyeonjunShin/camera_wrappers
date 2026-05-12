@@ -27,20 +27,17 @@ DISTORTION = np.array(
     ]
 )
 
-flange2camera = [
-    [ 0.0, -0.93969262, -0.34202014,  0.09292 ],
-    [ 1.0,  0.0,         0.0,         0.032   ],
-    [ 0.0, -0.34202014,  0.93969262,  0.17445 ],
-    [ 0.0,  0.0,         0.0,         1.0     ]
-]
+flange2camera = np.array([[ 0.0, -1.0, 0.0, 0.0565],
+                          [ 1.0, 0.0, 0.0,  0.0],
+                          [ 0.0, 0.0, 1.0,  0.0932],
+                          [ 0.0, 0.0, 0.0,  1.0]])
 
-
-R = [
-    -2.8327694488239893e-16, 1.0, 4.440892098500626e-16, # Row 0 rotation
-    1.0, 2.83276944882399e-16, -9.957992501029591e-17,  # Row 1 rotation
-    -9.957992501029598e-17, 4.440892098500626e-16, -1.0 # Row 2 rotation
-]
-
+# flange2camera = np.array([
+# [ 0.00000000e+00, -9.70295726e-01, -2.41921896e-01,  2.83800000e-02],
+#  [ 1.00000000e+00,  0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
+#  [ 0.00000000e+00, -2.41921896e-01,  9.70295726e-01,  7.89600000e-02],
+#  [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,  1.00000000e+00]]
+#  )
 
 class CommModule:
     def __init__(self):
@@ -95,6 +92,15 @@ class CommModule:
 
                         p_camera = np.array([x_c, y_c, z_c, 1])
 
+
+                        tf_camera = self.tf_flange @ flange2camera
+                        p_base = tf_camera @ p_camera
+
+                        cv2.circle(view_color, (self.x, self.y), 5, (0, 255, 0), -1)
+                        text = f"u:{self.x:.3f} v:{self.y:.3f} x:{p_base[0]:.3f} y:{p_base[1]:.3f} z:{p_base[2]:.3f} "
+                        cv2.putText(view_color, text, (self.x + 10, self.y - 10), 
+                                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv2.LINE_AA) # 본문
+
                 cv2.imshow("view", view_color)
                 key = cv2.waitKey(1)
                 if key == ord("q"):
@@ -103,17 +109,17 @@ class CommModule:
                     tf_camera = self.tf_flange @ flange2camera
                     p_base = tf_camera @ p_camera
                     
-                    # tf_target = np.array([1.0, 0.0, 0.0, p_base[0], 
-                    #                       0.0, 1.0, 0.0, p_base[1],
-                    #                       0.0, 0.0, 1.0, p_base[2],
-                    #                       0.0, 0.0, 0.0, 1.0]).astype(np.str_).tolist()
-                    tf_target = np.array([-2.8327694488239893e-16, 1.0, 4.440892098500626e-16,p_base[0],
-                                        1.0, 2.83276944882399e-16, -9.957992501029591e-17,  p_base[1],
-                                        -9.957992501029598e-17, 4.440892098500626e-16, -1.0, p_base[2],
-                                        0.0, 0.0, 0.0, 1.0  
-                                    ]).astype(np.str_).tolist()
+                    tf_target = np.array([0.0, 1.0, 0.0, p_base[0], 
+                                          1.0, 1.0, 0.002, p_base[1],
+                                          0.002, 0.0, -1.0, p_base[2],
+                                          0.0, 0.0, 0.0, 1.0]).astype(np.str_).tolist()
+                    # tf_target = np.array([-0.001,  1.,     0.001,  p_base[0],
+                    #                         0.985,  0.,     0.173,  p_base[1],
+                    #                         0.173,  0.001, -0.985,  0.05,
+                    #                             0,0,0,1]).astype(np.str_).tolist()
+                    
                     tf_target = ["1", "0.9"] + tf_target
-                    # print(tf_target)
+                    print(tf_target)
                     self.pub.put(" ".join(tf_target))
                     # print(p_base)
                     
