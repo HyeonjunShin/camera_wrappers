@@ -12,7 +12,7 @@ HEIGHT = 1080
 CHANNELS = 3
 TARGET_WIDHT = 448
 TARGET_HEIGHT = 256
-DEPTH_PATCH_SIZE = 100
+DEPTH_PATCH_SIZE = 50
 DEPTH_HALF_SIZE = DEPTH_PATCH_SIZE // 2
 
 PATCH_MASK = np.arange(-DEPTH_HALF_SIZE, DEPTH_HALF_SIZE + 1)
@@ -206,14 +206,14 @@ class CommModule:
                         self.viewer_3d.update_pcd(points_3d)
                         self.viewer_3d.update_frame(tf)
 
-                        tf_camera = self.tf_flange @ flange2camera
-                        # p_base = tf_camera @ p_camera
-                        p_base = tf_camera @ tf
+                        # tf_camera = self.tf_flange @ flange2camera
+                        # # p_base = tf_camera @ p_camera
+                        # p_base = tf_camera @ tf
 
                         cv2.circle(view_color, (self.x, self.y), 5, (0, 255, 0), -1)
-                        text = f"u:{self.x:.3f} v:{self.y:.3f} x:{p_base[0]:.3f} y:{p_base[1]:.3f} z:{p_base[2]:.3f} "
-                        cv2.putText(view_color, text, (self.x + 10, self.y - 10), 
-                                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv2.LINE_AA) # 본문
+                        # text = f"u:{self.x:.3f} v:{self.y:.3f} x:{p_base[0]:.3f} y:{p_base[1]:.3f} z:{p_base[2]:.3f} "
+                        # cv2.putText(view_color, text, (self.x + 10, self.y - 10), 
+                        #                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv2.LINE_AA) # 본문
 
                 cv2.imshow("view", view_color)
                 key = cv2.waitKey(1)
