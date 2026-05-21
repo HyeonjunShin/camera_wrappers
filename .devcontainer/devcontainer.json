@@ -1,30 +1,39 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-    "name": "Ubuntu (with Dockerfile)",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": "."
-    },
-    
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-python.python"
-            ]
-        }
-    }, 
-    "runArgs": [
-        "--privileged",
+	"name": "Ubuntu",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:noble",
+	"features": {
+		"ghcr.io/postfinance/devcontainer-features/build-essential:1": {},
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/devcontainers-extra/features/cmake:1": {}
+	},
+	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y x11-apps libopencv-dev",
+	"containerEnv": {
+		"XDG_RUNTIME_DIR": "/tmp/runtime-vscode"
+	},
+	"runArgs": [
 		"-it",
-        "--device=/dev/bus/usb:/dev/bus/usb",
-        "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
-        "-v", "${localEnv:HOME}/.Xauthority:/home/vscode/.Xauthority",
-        "-e", "DISPLAY=${localEnv:DISPLAY}",
-        "--gpus", "all",
-        "--ipc", "host",
-        "--net", "host"
-    ],
-    
-    // "features": {},
-    // "forwardPorts": [],
-    "remoteUser": "vscode"
+		"--privileged",
+		"--gpus", "all",
+		"-v", "/dev:/dev",
+		"-e", "DISPLAY=${localEnv:DISPLAY}",
+		"-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+	]
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
