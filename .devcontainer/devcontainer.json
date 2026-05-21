@@ -5,21 +5,19 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/base:noble",
 	"features": {
-		"ghcr.io/postfinance/devcontainer-features/build-essential:1": {},
-		"ghcr.io/devcontainers/features/python:1": {},
-		"ghcr.io/devcontainers-extra/features/cmake:1": {}
 	},
-	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y x11-apps libopencv-dev",
+	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y x11-apps libopencv-dev cmake build-essential",
 	"containerEnv": {
 		"XDG_RUNTIME_DIR": "/tmp/runtime-vscode"
 	},
 	"runArgs": [
 		"-it",
 		"--privileged",
-		"--gpus", "all",
+		"--device", "nvidia.com/gpu=all",
 		"-v", "/dev:/dev",
 		"-e", "DISPLAY=${localEnv:DISPLAY}",
 		"-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+		"-e", "XFT_DPI=144"
 	]
 
 	// Features to add to the dev container. More info: https://containers.dev/features.

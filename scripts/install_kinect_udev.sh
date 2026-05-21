@@ -1,0 +1,1 @@
+curl -s https://raw.githubusercontent.com/microsoft/Azure-Kinect-Sensor-SDK/refs/heads/develop/scripts/99-k4a.rules | sudo tee /etc/udev/rules.d/99-k4a.rules > /dev/null

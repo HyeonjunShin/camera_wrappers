@@ -1,19 +1,9 @@
 {
   "features": {
-    "ghcr.io/devcontainers-extra/features/cmake:1": {
-      "version": "1.0.0",
-      "resolved": "ghcr.io/devcontainers-extra/features/cmake@sha256:86e25502f6b1213a68d88e4e55c969eba0b5016b9666d216ab65f5047808bc90",
-      "integrity": "sha256:86e25502f6b1213a68d88e4e55c969eba0b5016b9666d216ab65f5047808bc90"
-    },
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "1.8.0",
-      "resolved": "ghcr.io/devcontainers/features/python@sha256:fbcad6955caeecc5ad3f7886baf652e25cba5225a6c4c2287c536de2e5607511",
-      "integrity": "sha256:fbcad6955caeecc5ad3f7886baf652e25cba5225a6c4c2287c536de2e5607511"
-    },
-    "ghcr.io/postfinance/devcontainer-features/build-essential:1": {
-      "version": "1.0.0",
-      "resolved": "ghcr.io/postfinance/devcontainer-features/build-essential@sha256:96142f564ddb2174f202c992007136c0f7d53f7ea15b829bcf28d037deb7c694",
-      "integrity": "sha256:96142f564ddb2174f202c992007136c0f7d53f7ea15b829bcf28d037deb7c694"
+    "ghcr.io/devcontainer-community/devcontainer-features/nvidia.com-cuda:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/devcontainer-community/devcontainer-features/nvidia.com-cuda@sha256:02a9cfc3b71a1d5bba60b3676d8177cefdc85dfd2ef2fd5fa3caa65652f58650",
+      "integrity": "sha256:02a9cfc3b71a1d5bba60b3676d8177cefdc85dfd2ef2fd5fa3caa65652f58650"
     }
   }
 }
