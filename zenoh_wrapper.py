@@ -2,31 +2,30 @@ import zenoh
 import cv2
 import numpy as np
 from camera_devices.kinect_wrapper import KinectCamera
+import json 
 
-class ZenohComm:
-    def __init__(self, camera):
-        self.camera = camera
+
+
+class ZenohWrapper:
+    def __init__(self, ID):
+        self.zenoh = zenoh.Zenoh()
+        self.ID = ID
+
+    def pub_frame(self, frame):
+        self.zenoh.put(f"camera{self.ID}/color", frame.get_color())
+        self.zenoh.put(f"camera{self.ID}/depth", frame.get_depth())
+        self.zenoh.put(f"camera{self.ID}/timestamp", frame.get_timestamp())
     
-    def pub(self):
-        self.camera.start()
-        while True:
-            frame = camera.get_frame()
-            if frame is None:
-                continue
-
-            cv2.imshow("img", frame[0])
-            key = cv2.waitKey(1)
-            
-            if key == ord('q'):
-                break
-
-        camera.stop()
-
-
+    def sub_frame(self):
+        color = self.zenoh.get(f"camera{self.ID}/color")
+        depth = self.zenoh.get(f"camera{self.ID}/depth")
+        timestamp = self.zenoh.get(f"camera{self.ID}/timestamp")
+        return Frame(color, depth, timestamp)
+    
 if __name__ == "__main__":
     camera = KinectCamera()
-    zenoh_comm = ZenohComm(camera)
-    zenoh_comm.pub()
+    zenoh_wrapper = ZenohWrapper(camera)
+    zenoh_wrapper.pub()
 
     # main()
 

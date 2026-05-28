@@ -10,20 +10,22 @@ from pyk4a import (
     ImageFormat,
     PyK4A,
 )
+from frame import Frame
 
 class KinectCamera:
     def __init__(self):
         self.config = Config(
-            color_resolution=ColorResolution.RES_1080P,
-            color_format=ImageFormat.COLOR_BGRA32,
-            depth_mode=DepthMode.WFOV_UNBINNED,
+            color_resolution=ColorResolution.RES_720P,
+            color_format=ImageFormat.COLOR_MJPG,
+            depth_mode=DepthMode.NFOV_UNBINNED,
             synchronized_images_only=True,
-            camera_fps=FPS.FPS_15,
+            camera_fps=FPS.FPS_30,
         )
         self.k4a = PyK4A(self.config)
 
-        self.width = 1920
-        self.height = 1080
+        self.width = 1280
+        self.height = 720
+        self.FPS = 30
 
     def start(self):
         try:
@@ -152,7 +154,9 @@ class KinectCamera:
             return None
         timestamp_image = capture.color_timestamp_usec
 
-        color = cv2.cvtColor(color, cv2.COLOR_BGRA2RGB)
+        # color = cv2.cvtColor(color, cv2.COLOR_BGRA2RGB)
+        # color = cv2.imdecode(color, cv2.IMREAD_COLOR)
+
         # image = cv2.remap(image, self.mapx, self.mapy, cv2.INTER_LINEAR)
 
         # depth = cv2.remap(depth, self.mapx, self.mapy, cv2.INTER_LINEAR)
@@ -168,7 +172,8 @@ class KinectCamera:
         # depth, beta,
         # 0)
         # cv2.imshow("depth", overlay_result)
-        return (color, depth, timestamp_image)
+        # return (color, depth, timestamp_image)
+        return Frame(timestamp_image, color, depth)
 
     def getUndistorted(self, color):
         color = cv2.remap(color, self.mapx, self.mapy, cv2.INTER_LINEAR)
