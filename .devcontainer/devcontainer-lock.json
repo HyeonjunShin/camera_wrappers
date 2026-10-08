@@ -1,9 +1,0 @@
-{
-  "features": {
-    "ghcr.io/devcontainer-community/devcontainer-features/nvidia.com-cuda:1": {
-      "version": "1.0.2",
-      "resolved": "ghcr.io/devcontainer-community/devcontainer-features/nvidia.com-cuda@sha256:02a9cfc3b71a1d5bba60b3676d8177cefdc85dfd2ef2fd5fa3caa65652f58650",
-      "integrity": "sha256:02a9cfc3b71a1d5bba60b3676d8177cefdc85dfd2ef2fd5fa3caa65652f58650"
-    }
-  }
-}

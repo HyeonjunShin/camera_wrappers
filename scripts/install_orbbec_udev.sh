@@ -1,1 +1,0 @@
-curl -s https://raw.githubusercontent.com/orbbec/OrbbecSDK_v2/refs/heads/main/scripts/env_setup/99-obsensor-libusb.rules | sudo tee /etc/udev/rules.d/99-obsensor-libusb.rules > /dev/null
